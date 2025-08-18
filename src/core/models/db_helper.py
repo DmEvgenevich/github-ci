@@ -1,5 +1,5 @@
 from typing import AsyncGenerator
-from core.config import settings
+from ..config import settings
 
 from sqlalchemy.ext.asyncio import (
     create_async_engine,
@@ -30,7 +30,7 @@ class DatabaseHelper:
             async_sessionmaker(
                 bind=self.engine,
                 autoflush=False,
-                autocommut=False,
+                # autocommut=True,
                 expire_on_commit=False,
             ))
 
