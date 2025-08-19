@@ -2,9 +2,9 @@ from typing import Annotated, List
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api.crud.recipe import get_all_recipes, get_recipe_by_id, create_recipe
-from core.models import db_helper
-from core.schemas.recipe import RecipeCreate, RecipeDetail, RecipeRead
+from src.api.crud import recipe
+from src.core.models import db_helper
+from src.core.schemas.recipe import RecipeCreate, RecipeDetail, RecipeRead
 
 
 recipe_route = APIRouter()
@@ -19,7 +19,7 @@ async def get_all_recipes(
             Depends(db_helper.session_getter),
         ]
 ):
-    recipes = await get_all_recipes(session=session)
+    recipes = await recipe.get_all_recipes(session=session)
     return recipes
 
 
@@ -35,10 +35,10 @@ async def get_recipe_by_id(
         ],
         recipe_id: int
 ):
-    recipe = await get_recipe_by_id(
+    recipe_1 = await recipe.get_recipe_by_id(
         session=session, recipe_id=recipe_id
     )
-    return recipe
+    return recipe_1
 
 
 @recipe_route.post(
@@ -49,9 +49,9 @@ async def add_new_recipe(
             AsyncSession,
             Depends(db_helper.session_getter)
         ],
-        recipe_data
+        recipe_data: RecipeCreate
 ):
-    recipe = await create_recipe(
+    recipe = await recipe.create_recipe(
         session=session,
         recipe_create=recipe_data,
     )

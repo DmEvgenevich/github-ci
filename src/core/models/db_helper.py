@@ -1,5 +1,5 @@
 from typing import AsyncGenerator
-from ..config import settings
+from config import settings
 
 from sqlalchemy.ext.asyncio import (
     create_async_engine,
@@ -23,14 +23,14 @@ class DatabaseHelper:
             echo=echo,
             echo_pool=echo_pool,
             pool_size=pool_size,
-            max_overflow=max_overflow
+            max_overflow=max_overflow,
         )
 
         self.session_factory: async_sessionmaker[AsyncSession] = (
             async_sessionmaker(
                 bind=self.engine,
                 autoflush=False,
-                # autocommut=True,
+                autocommit=False,
                 expire_on_commit=False,
             ))
 
@@ -47,5 +47,5 @@ db_helper = DatabaseHelper(
     echo=settings.db.echo,
     echo_pool=settings.db.echo_pool,
     pool_size=settings.db.pool_size,
-    max_overflow=settings.db.max_overflow
+    max_overflow=settings.db.max_overflow,
 )

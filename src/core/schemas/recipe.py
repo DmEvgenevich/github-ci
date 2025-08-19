@@ -38,4 +38,4 @@ class RecipeDetail(BaseModel):
     cooking_time: int
     recipe_description: str
     views: int
-    ingredient: List[Ingredient]
+    ingredients: List[Ingredient]

@@ -2,8 +2,8 @@ from typing import Sequence
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.models import Ingredient, IngredientsInRecipe, Recipe
-from core.schemas.recipe import RecipeCreate
+from src.core.models import Ingredient, IngredientsInRecipe, Recipe
+from src.core.schemas.recipe import RecipeCreate
 
 
 async def get_all_recipes(

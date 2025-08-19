@@ -2,9 +2,9 @@ from typing import Annotated, List
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from api.crud.ingredient import get_all_ingredients, create_ingredient
-from core.models import db_helper
-from core.schemas.ingredient import IngredientCreate, IngredientRead
+from src.api.crud import ingredient
+from src.core.models import db_helper
+from src.core.schemas.ingredient import IngredientCreate, IngredientRead
 
 ingredient_route = APIRouter()
 
@@ -17,10 +17,10 @@ ingredient_route = APIRouter()
 async def get_all_ingredients(
         session: Annotated[
             AsyncSession,
-            Depends(db_helper.session_getter)
+            Depends(db_helper.session_getter),
         ]
 ):
-    ingredients = await get_all_ingredients(session=session)
+    ingredients = await ingredient.get_all_ingredients(session=session)
     return ingredients
 
 
@@ -36,8 +36,8 @@ async def add_new_ingredients(
         ],
         ingredient_data: IngredientCreate,
 ):
-    ingredient = await create_ingredient(
+    ingredients = await ingredient.create_ingredient(
         session=session,
         ingredient_create=ingredient_data,
     )
-    return ingredient
+    return ingredients

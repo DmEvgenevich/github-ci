@@ -2,11 +2,11 @@ import uvicorn
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-from core.config import settings
-from core.models import db_helper
-from api.main_page import main_route
-from api.recipe import recipe_route
-from api.ingredient import ingredient_route
+from config import settings
+from src.core.models import db_helper
+from src.api.main_page import main_route
+from src.api.recipe import recipe_route
+from src.api.ingredient import ingredient_route
 
 
 @asynccontextmanager

@@ -3,8 +3,8 @@ from typing import Sequence
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.models import Ingredient
-from core.schemas.ingredient import IngredientCreate
+from src.core.models import Ingredient
+from src.core.schemas.ingredient import IngredientCreate
 
 
 async def get_all_ingredients(

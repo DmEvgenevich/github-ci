@@ -12,7 +12,7 @@ class DatabaseConfig(BaseModel):
     echo: bool = False
     echo_pool: bool = False
     pool_size: int = 50
-    max_overflow: int =10
+    max_overflow: int = 10
     naming_convention: dict[str, str] = {
         "ix": "ix_%(column_0_label)s",
         "ux": "ux_%(table_name)s_%(column_0_label)s",
