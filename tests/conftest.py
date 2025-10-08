@@ -1,6 +1,5 @@
 from collections.abc import AsyncGenerator
 
-
 import pytest_asyncio
 from fastapi.testclient import TestClient
 from httpx import ASGITransport, AsyncClient
